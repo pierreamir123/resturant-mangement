@@ -8,10 +8,12 @@
 #include "..\Events\Event.h"
 #include"..\Generic_DS\PriorityQueue.h"
 #include"..\Generic_DS\SortedList.h"
+#include"..\Generic_DS\PriorityData.h"
 
 #include "Order.h"
 
 // it is the maestro of the project
+
 class Restaurant  
 {	
 private:
@@ -23,7 +25,7 @@ private:
 	
 	// data structure of orders
 	Queue<Order*> W_Vegan ;    //queue of waiting vegan orders
-	PriorityQueue<Order*> W_VIP;//priority queue of waiting vip orders
+	PriorityQueue<PriorityData<Order>*> W_VIP;//priority queue of waiting vip orders
 	Queue<Order*> In_service;//queue of orders that in service 
 	Queue<Order*> finished ;// queue of finished orders
 	SortedList<Order*>W_Normal;//sorted list of waiting normal orders
@@ -47,9 +49,10 @@ private:
 
 public:
 	
+	
 	Restaurant();
 	~Restaurant();
-	
+	void Add_Order(Order);
 	void ExecuteEvents(int TimeStep);	//executes all events at current timestep
 	void RunSimulation();
 

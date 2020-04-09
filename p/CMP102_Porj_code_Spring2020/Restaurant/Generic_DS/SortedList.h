@@ -20,7 +20,7 @@ public:
 	bool insert ( int newPosition, const T & newEntry );
 	bool insertSorted ( const T & newEntry );
 	bool remove ( int position );           // Ambiguity fi 7alet en T integar
-	bool remove ( const T & anEntry );      // Ambiguity fi 7alet en T integar
+	bool remove (const T & anEntry );      // Ambiguity fi 7alet en T integar
 	void clear ();
 	bool getEntry ( int position, T & anEntry ) const;
 	bool replace ( int position, const T & newEntry, T & oldEntry ); 
@@ -122,7 +122,7 @@ bool SortedList<T> :: insertSorted ( const T & newEntry )   //project Note: momk
 	}
 	else 
 	{
-		while ( nptr ->getNext() != nullptr && nptr ->getNext() ->getItem() < newEntry )
+		while ( nptr ->getNext() != nullptr && nptr ->getNext() ->getItem() <= newEntry )
 		{
 			nptr = nptr ->getNext();
 		}

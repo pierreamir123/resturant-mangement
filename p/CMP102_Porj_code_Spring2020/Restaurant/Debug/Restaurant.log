@@ -1,63 +1,67 @@
-﻿Build started 4/9/2020 12:17:09 AM.
-     1>Project "E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
+﻿Build started 4/9/2020 11:47:47 PM.
+     1>Project "E:\cufe-chs sephmore\spring\data structure\ppp\p\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
        Project file contains ToolsVersion="14.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>ClCompile:
-         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Demo_Main.cpp Events\ArrivalEvent.cpp Rest\Restaurant.cpp
+         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt CMUgraphicsLib\CMUgraphics.cpp CMUgraphicsLib\colors.cpp CMUgraphicsLib\image.cpp CMUgraphicsLib\keyqueue.cpp CMUgraphicsLib\mousequeue.cpp CMUgraphicsLib\windowinput.cpp Demo_Main.cpp Events\Event.cpp Events\ArrivalEvent.cpp GUI\GUI.cpp Rest\Cook.cpp Rest\Order.cpp Rest\Restaurant.cpp
          Restaurant.cpp
-     1>e:\cufe-chs sephmore\spring\data structure\ds project s2020 - student\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(106): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>e:\cufe-chs sephmore\spring\data structure\ds project s2020 - student\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(160): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
-                 c:\program files (x86)\vc\include\stdlib.h(909) : see declaration of 'itoa'
-         Generating Code...
-         Compiling...
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(19): error C3867: 'Order::GetType': function call missing argument list; use '&Order::GetType' to create a pointer to member
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(19): error C2678: binary '==' : no operator found which takes a left-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+                 c:\program files (x86)\vc\include\exception(507): could be 'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(512): or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(517): or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t)'
+                 c:\program files (x86)\vc\include\system_error(426): or       'bool std::operator ==(const std::error_code &,const std::error_condition &) throw()'
+                 c:\program files (x86)\vc\include\system_error(434): or       'bool std::operator ==(const std::error_condition &,const std::error_code &) throw()'
+                 c:\program files (x86)\windows kits\8.0\include\shared\guiddef.h(192): or       'bool operator ==(const GUID &,const GUID &)'
+                 e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\colors.h(28): or       'bool operator ==(color,color)'
+                 'Order::GetType': function call missing argument list; use '&Order::GetType' to create a pointer to member
+                 while trying to match the argument list '()'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(23): error C3867: 'Order::GetType': function call missing argument list; use '&Order::GetType' to create a pointer to member
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(23): error C2678: binary '==' : no operator found which takes a left-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+                 c:\program files (x86)\vc\include\exception(507): could be 'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(512): or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(517): or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t)'
+                 c:\program files (x86)\vc\include\system_error(426): or       'bool std::operator ==(const std::error_code &,const std::error_condition &) throw()'
+                 c:\program files (x86)\vc\include\system_error(434): or       'bool std::operator ==(const std::error_condition &,const std::error_code &) throw()'
+                 c:\program files (x86)\windows kits\8.0\include\shared\guiddef.h(192): or       'bool operator ==(const GUID &,const GUID &)'
+                 e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\colors.h(28): or       'bool operator ==(color,color)'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(28): error C3867: 'Order::GetType': function call missing argument list; use '&Order::GetType' to create a pointer to member
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(28): error C2678: binary '==' : no operator found which takes a left-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+                 c:\program files (x86)\vc\include\exception(507): could be 'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(512): or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &)'
+                 c:\program files (x86)\vc\include\exception(517): or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t)'
+                 c:\program files (x86)\vc\include\system_error(426): or       'bool std::operator ==(const std::error_code &,const std::error_condition &) throw()'
+                 c:\program files (x86)\vc\include\system_error(434): or       'bool std::operator ==(const std::error_condition &,const std::error_code &) throw()'
+                 c:\program files (x86)\windows kits\8.0\include\shared\guiddef.h(192): or       'bool operator ==(const GUID &,const GUID &)'
+                 e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\colors.h(28): or       'bool operator ==(color,color)'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(124): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         Order.cpp
+         Cook.cpp
+         GUI.cpp
          ArrivalEvent.cpp
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\events\arrivalevent.cpp(19): error C2661: 'Order::Order' : no overloaded function takes 2 arguments
+         Event.cpp
          Demo_Main.cpp
+         windowinput.cpp
+         mousequeue.cpp
+         keyqueue.cpp
+         image.cpp
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\image.cpp(115): warning C4018: '<' : signed/unsigned mismatch
+         colors.cpp
+         CMUgraphics.cpp
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(751): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\string.h(110) : see declaration of 'strcpy'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(1164): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(1171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(1202): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(1210): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\p\cmp102_porj_code_spring2020\restaurant\cmugraphicslib\cmugraphics.cpp(1357): warning C4018: '>' : signed/unsigned mismatch
          Generating Code...
-       Link:
-         C:\Program Files (x86)\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
-         Debug\colors.obj
-         Debug\image.obj
-         Debug\jpegload.obj
-         Debug\jcomapi.obj
-         Debug\jcparam.obj
-         Debug\jdapimin.obj
-         Debug\jdapistd.obj
-         Debug\jdatasrc.obj
-         Debug\jdcoefct.obj
-         Debug\jdcolor.obj
-         Debug\jddctmgr.obj
-         Debug\jdhuff.obj
-         Debug\jdinput.obj
-         Debug\jdmainct.obj
-         Debug\jdmarker.obj
-         Debug\jdmaster.obj
-         Debug\jdmerge.obj
-         Debug\jdphuff.obj
-         Debug\jdpostct.obj
-         Debug\jdsample.obj
-         Debug\jdtrans.obj
-         Debug\jerror.obj
-         Debug\jidctflt.obj
-         Debug\jidctfst.obj
-         Debug\jidctint.obj
-         Debug\jidctred.obj
-         Debug\jmemmgr.obj
-         Debug\jmemnobs.obj
-         Debug\jquant1.obj
-         Debug\jquant2.obj
-         Debug\jutils.obj
-         Debug\keyqueue.obj
-         Debug\mousequeue.obj
-         Debug\windowinput.obj
-         Debug\Demo_Main.obj
-         Debug\Event.obj
-         Debug\ArrivalEvent.obj
-         Debug\GUI.obj
-         Debug\Cook.obj
-         Debug\Order.obj
-         Debug\Restaurant.obj
-         Restaurant.vcxproj -> E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Debug\Restaurant.exe
-     1>Done Building Project "E:\cufe-chs sephmore\spring\data structure\DS Project S2020 - Student\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" (Build target(s)).
+     1>Done Building Project "E:\cufe-chs sephmore\spring\data structure\ppp\p\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:14.17
+Time Elapsed 00:00:16.76

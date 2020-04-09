@@ -1,17 +1,35 @@
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
+
 using namespace std;
 
 #include "Restaurant.h"
 #include "..\Events\ArrivalEvent.h"
 #include"..\Generic_DS\PriorityQueue.h"
 #include"..\Generic_DS\SortedList.h"
-
+#include"..\Generic_DS\PriorityData.h"
 
 Restaurant::Restaurant() 
 {
 	pGUI = NULL;
+}
+void Restaurant::Add_Order(Order o )
+{
+	if (o.GetType== TYPE_NRM )
+	{
+		W_Normal.insertSorted(&o) ;
+	}
+	if (o.GetType== TYPE_VGAN )
+	{
+		W_Vegan.enqueue(&o);
+
+	}
+	if(o.GetType== TYPE_VIP)
+	{
+		PriorityData<Order>* pop=new PriorityData<Order>(o,1);
+		W_VIP.Enqueue(pop);
+	}
 }
 
 void Restaurant::RunSimulation()
