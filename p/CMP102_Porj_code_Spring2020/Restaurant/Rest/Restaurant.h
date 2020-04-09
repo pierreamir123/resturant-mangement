@@ -16,12 +16,23 @@ class Restaurant
 {	
 private:
 	GUI *pGUI;
+
+	// data structure of events
 	Queue<Event*> EventsQueue;	//Queue of all events that will be loaded from file
-	Queue<Order*> W_Vegan ;
-	PriorityQueue<Order*> W_VIP;
-	Queue<Order*> In_service;
-	Queue<Order*> finished ;
-	SortedList<Order*>W_Normal;
+	
+	
+	// data structure of orders
+	Queue<Order*> W_Vegan ;    //queue of waiting vegan orders
+	PriorityQueue<Order*> W_VIP;//priority queue of waiting vip orders
+	Queue<Order*> In_service;//queue of orders that in service 
+	Queue<Order*> finished ;// queue of finished orders
+	SortedList<Order*>W_Normal;//sorted list of waiting normal orders
+		
+	
+	//data structure of cooks 
+	SortedList<Cook*> AV_Cooks;//avalible cooks
+		Queue<Cook*>Busy_Cooks; // queue busy cooks 
+		Queue<Cook*>Break_Cooks;// queue cooks who take break
 
 	/// ==> 
 	//	DEMO-related members. Should be removed in phases 1&2
