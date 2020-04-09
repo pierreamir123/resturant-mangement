@@ -52,7 +52,7 @@ public:
 	
 	Restaurant();
 	~Restaurant();
-	void Add_Order(Order);
+	void Add_Order(Order*);
 	void ExecuteEvents(int TimeStep);	//executes all events at current timestep
 	void RunSimulation();
 

@@ -14,20 +14,20 @@ Restaurant::Restaurant()
 {
 	pGUI = NULL;
 }
-void Restaurant::Add_Order(Order o )
+void Restaurant::Add_Order(Order* o )
 {
-	if (o.GetType== TYPE_NRM )
+	if (o->GetType== TYPE_NRM )
 	{
-		W_Normal.insertSorted(&o) ;
+		W_Normal.insertSorted(o) ;
 	}
-	if (o.GetType== TYPE_VGAN )
+	if (o->GetType== TYPE_VGAN )
 	{
-		W_Vegan.enqueue(&o);
+		W_Vegan.enqueue(o);
 
 	}
-	if(o.GetType== TYPE_VIP)
+	if(o->GetType== TYPE_VIP)
 	{
-		PriorityData<Order>* pop=new PriorityData<Order>(o,1);
+		PriorityData<Order*>* pop=new PriorityData<Order*>(o,1);
 		W_VIP.Enqueue(pop);
 	}
 }
@@ -36,7 +36,7 @@ void Restaurant::RunSimulation()
 {
 	pGUI = new GUI;
 	PROG_MODE	mode = pGUI->getGUIMode();
-		
+
 	switch (mode)	//Add a function for each mode in next phases
 	{
 	case MODE_INTR:
@@ -74,8 +74,8 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 
 Restaurant::~Restaurant()
 {
-		if (pGUI)
-			delete pGUI;
+	if (pGUI)
+		delete pGUI;
 }
 
 void Restaurant::FillDrawingList()
@@ -83,20 +83,20 @@ void Restaurant::FillDrawingList()
 	Order*pOrd;
 
 
-	
+
 	//This function should be implemented in phase1
 	//It should add ALL orders and Cooks to the drawing list
 	//It should get orders from orders lists/queues/stacks/whatever (same for Cooks)
 	//To add orders it should call function  void GUI::AddToDrawingList(Order* pOrd);
 	//To add Cooks it should call function  void GUI::AddToDrawingList(Cook* pCc);
 	int size = 0;
-		Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
-		
-		for(int i=0; i<size; i++)
-		{
-			pOrd = Demo_Orders_Array[i];
-			pGUI->AddToDrawingList(pOrd);
-		}
+	Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
+
+	for(int i=0; i<size; i++)
+	{
+		pOrd = Demo_Orders_Array[i];
+		pGUI->AddToDrawingList(pOrd);
+	}
 
 }
 
@@ -113,11 +113,11 @@ void Restaurant::FillDrawingList()
 //It should be removed starting phase 1
 void Restaurant::Just_A_Demo()
 {
-	
+
 	//
 	// THIS IS JUST A DEMO FUNCTION
 	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
-	
+
 	int EventCnt;	
 	Order* pOrd;
 	Event* pEv;
@@ -128,7 +128,7 @@ void Restaurant::Just_A_Demo()
 
 	pGUI->PrintMessage("Generating Events randomly... In next phases, Events should be loaded from a file...CLICK to continue");
 	pGUI->waitForClick();
-		
+
 	//Just for sake of demo, generate some cooks and add them to the drawing list
 	//In next phases, Cooks info should be loaded from input file
 	int C_count = 12;	
@@ -142,11 +142,11 @@ void Restaurant::Just_A_Demo()
 		pC[i].setType((ORD_TYPE)(rand()%TYPE_CNT));
 	}	
 
-		
+
 	int EvTime = 0;
 
 	int O_id = 1;
-	
+
 	//Create Random events and fill them into EventsQueue
 	//All generated event will be "ArrivalEvents" for the demo
 	for(int i=0; i<EventCnt; i++)
@@ -162,13 +162,13 @@ void Restaurant::Just_A_Demo()
 	// --->   In next phases, no random generation is done
 	// --->       EventsQueue should be filled from actual events loaded from input file
 
-	
-	
-	
-	
+
+
+
+
 	//Now We have filled EventsQueue (randomly)
 	int CurrentTimeStep = 1;
-	
+
 
 	//as long as events queue is not empty yet
 	while(!EventsQueue.isEmpty())
@@ -181,26 +181,26 @@ void Restaurant::Just_A_Demo()
 
 		//The next line may add new orders to the DEMO_Queue
 		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
-		
 
-/////////////////////////////////////////////////////////////////////////////////////////
+
+		/////////////////////////////////////////////////////////////////////////////////////////
 		/// The next code section should be done through function "FillDrawingList()" once you
 		/// decide the appropriate list type for Orders and Cooks
-		
+
 		//Let's add ALL randomly generated Cooks to GUI::DrawingList
 		for(int i=0; i<C_count; i++)
 			pGUI->AddToDrawingList(&pC[i]);
-		
+
 		//Let's add ALL randomly generated Ordes to GUI::DrawingList
 		int size = 0;
 		Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
-		
+
 		for(int i=0; i<size; i++)
 		{
 			pOrd = Demo_Orders_Array[i];
 			pGUI->AddToDrawingList(pOrd);
 		}
-/////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////
 
 		pGUI->UpdateInterface();
 		Sleep(1000);
@@ -214,7 +214,7 @@ void Restaurant::Just_A_Demo()
 	pGUI->PrintMessage("generation done, click to END program");
 	pGUI->waitForClick();
 
-	
+
 }
 ////////////////
 
