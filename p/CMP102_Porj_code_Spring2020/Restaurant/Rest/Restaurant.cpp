@@ -27,7 +27,7 @@ void Restaurant::Add_Order(Order* o )
 	}
 	if(o->GetType== TYPE_VIP)
 	{
-		PriorityData<Order*>* pop=new PriorityData<Order*>(o,1);
+		 PriorityData<Order*> pop (o,1);
 		W_VIP.Enqueue(pop);
 	}
 }
