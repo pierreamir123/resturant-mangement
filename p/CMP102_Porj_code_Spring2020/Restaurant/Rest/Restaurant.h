@@ -32,9 +32,11 @@ private:
 		
 	
 	//data structure of cooks 
-	SortedList<Cook*> AV_Cooks;//avalible cooks
-		Queue<Cook*>Busy_Cooks; // queue busy cooks 
-		Queue<Cook*>Break_Cooks;// queue cooks who take break
+	Queue<Cook*> AV_Cooks_Normal;//avalible cooks of normal cooks
+	Queue<Cook*> AV_Cooks_vegan;//queue of avalible vegan cooks
+	Queue<Cook*> Av_cooks_VIP;//queue of avalible vip cooks
+		SortedList<Cook*>Assigned_Cooks; // queue busy cooks 
+		SortedList<Cook*>ON_Break_Cooks;// queue cooks who take break
 
 	/// ==> 
 	//	DEMO-related members. Should be removed in phases 1&2
@@ -55,7 +57,7 @@ public:
 	void Add_Order(Order*);
 	void ExecuteEvents(int TimeStep);	//executes all events at current timestep
 	void RunSimulation();
-
+	void Simple_simulator();
 	
 
 
