@@ -23,6 +23,24 @@ enum ORD_STATUS	//order status
 };
 
 
+enum COOK_TYPE
+{
+	CTYPE_NRM,	//normal order
+	CTYPE_VGAN,	//vegan
+	CTYPE_VIP,	//VIP
+	CTYPE_CNT	//Number of types
+
+
+};
+enum COOK_STATUS   // --->
+{
+	AVAILABLE,   //available to cook ( not on break, not assigned with an order )
+	ASSIGNED,    //assigned with an order to cook
+	ON_BREAK,    //resting, on break
+	COOK_STATUS_CNT
+};
+
+
 enum PROG_MODE	//mode of the program interface
 {
 	MODE_INTR,	//interactive mode

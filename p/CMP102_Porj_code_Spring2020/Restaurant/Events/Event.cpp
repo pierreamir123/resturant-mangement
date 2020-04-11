@@ -1,5 +1,6 @@
 #include "Event.h"
-
+Event::Event()
+{}
 
 Event::Event(int eTime, int ordID)
 {

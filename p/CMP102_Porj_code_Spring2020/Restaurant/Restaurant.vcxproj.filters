@@ -117,6 +117,15 @@
     <ClInclude Include="Generic_DS\SortedList.h">
       <Filter>Restaurant</Filter>
     </ClInclude>
+    <ClInclude Include="Events\Cancellation.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Promotion.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="CMUgraphicsLib\auxil.h">
+      <Filter>Restaurant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo_Main.cpp" />
@@ -243,6 +252,9 @@
     <ClCompile Include="Rest\Cook.cpp">
       <Filter>Restaurant</Filter>
     </ClCompile>
+    <ClCompile Include="Events\Cancellation.cpp" />
+    <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
+    <ClCompile Include="Events\p.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMUgraphicsLib\Manual.txt">

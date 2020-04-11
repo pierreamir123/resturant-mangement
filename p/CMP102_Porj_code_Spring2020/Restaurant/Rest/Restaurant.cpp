@@ -16,21 +16,121 @@ Restaurant::Restaurant()
 }
 void Restaurant::Add_Order(Order* o )
 {
-	if (o->GetType== TYPE_NRM )
+	if (o->GetType()== TYPE_NRM )
 	{
 		W_Normal.insertSorted(o) ;
 	}
-	if (o->GetType== TYPE_VGAN )
+	if (o->GetType()== TYPE_VGAN )
 	{
 		W_Vegan.enqueue(o);
 
 	}
-	if(o->GetType== TYPE_VIP)
+	if(o->GetType()== TYPE_VIP)
 	{
-		 PriorityData<Order*> pop (o,1);
+		PriorityData<Order*> pop (o,1);
 		W_VIP.Enqueue(pop);
 	}
 }
+void Restaurant::Add_OrderVip(PriorityData<Order*> o)
+{
+	W_VIP.Enqueue(o);
+}
+void Restaurant::LoadingFunction(ifstream & input) // note that we passed the ifstream by & (why?)
+{
+	int N,G,V;
+	int SN,SG,SV;
+	int BO,BN,BG,BV;
+	int AutoP;
+	int M;
+
+	ORD_TYPE OrType;
+
+	if (input.is_open())
+	{
+		input>>N>>G>>V;
+		input>>SN>>SG>>SV;
+		input>>BO>>BN>>BG>>BV;
+		input>>AutoP;
+		input>>M;
+
+
+
+		for(int ID=0;ID<=N;ID++)
+		{
+			OrType = TYPE_NRM;
+			Cook* NormalCook=new Cook();  // variables tet3emel fe class cook we ne3mel constructor keda
+			
+			NormalCook->setType(OrType);
+			NormalCook->setBreakDuration(BN);
+			NormalCook->setID(ID);
+			NormalCook->setSpeed(SN);
+			AV_Cooks_Normal.enqueue(NormalCook);    //ne3mel cook object fe class cook
+		}
+		for(int ID=0;ID<=G;ID++)
+		{
+			OrType = TYPE_VGAN;
+			Cook* VeganCook=new Cook();
+			VeganCook->setType(OrType);
+			VeganCook->setBreakDuration(BG);
+			VeganCook->setID(ID);
+			VeganCook->setSpeed(SG);
+			AV_Cooks_vegan.enqueue(VeganCook);
+		}
+		for(int ID=0;ID<=V;ID++)
+		{
+			OrType = TYPE_VIP;
+			Cook* VipCook=new Cook();
+			VipCook->setType(OrType);
+			VipCook->setBreakDuration(BV);
+			VipCook->setID(ID);
+			VipCook->setSpeed(SV);
+
+			Av_cooks_VIP.enqueue(VipCook);
+		}
+		/////////////////////////////////////////
+		int TS,ID,SIZE,MONY;
+		int ExMony;
+		int temp,orderType;
+
+
+		for(int l=0; l<M; l++)
+		{
+			input>>temp>>orderType;
+			if(temp == 'R')
+			{
+				if(orderType=='N')
+					OrType=TYPE_NRM;
+				if(orderType=='G')
+					OrType=TYPE_VGAN;
+				if(orderType=='V')
+					OrType=TYPE_VIP;
+
+				input>>TS>>ID>>SIZE>>MONY;
+				Event* event= new ArrivalEvent((ORD_TYPE)OrType,TS,ID,SIZE,MONY); // variables tet7at fel class we ne3melhom fe constructor
+				EventsQueue.enqueue(event);
+			}
+			if(temp== 'X')
+			{
+				input>>TS>>ID;
+				Event* event= new Cancellation(TS,ID);
+				EventsQueue.enqueue(event);
+			}
+			if(temp=='P')
+			{
+				input>>TS>>ID>>ExMony;
+				Event* event= new Promotion (TS,ID,ExMony);
+				EventsQueue.enqueue(event);
+			}
+		}
+
+
+		input.close();
+	}
+	else cout << "Unable to open file";
+}
+
+
+
 
 void Restaurant::RunSimulation()
 {
@@ -77,7 +177,18 @@ Restaurant::~Restaurant()
 	if (pGUI)
 		delete pGUI;
 }
+bool Restaurant::getEntryNormal(int position, Order*p)
+{
 
+	W_Normal.getEntry( position, p);
+	return true;
+}
+
+bool Restaurant::removeNormal(int i)
+{
+	W_Normal.remove(i);
+	return true;
+}
 void Restaurant::FillDrawingList()
 {
 	Order*pOrd;
@@ -154,7 +265,7 @@ void Restaurant::Just_A_Demo()
 		O_id += (rand()%4+1);		
 		int OType = rand()%TYPE_CNT;	//Randomize order type		
 		EvTime += (rand()%5+1);			//Randomize event time
-		pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType);
+		//pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType);
 		EventsQueue.enqueue(pEv);
 
 	}	
