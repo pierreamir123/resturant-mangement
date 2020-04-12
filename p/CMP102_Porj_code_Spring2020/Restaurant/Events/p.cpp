@@ -3,14 +3,7 @@
 #include"..\Generic_DS\PriorityData.h"
 #include"..\Generic_DS\PriorityQueue.h"
 #include"Event.h"
-Promotion::Promotion()
-{
 
-}
-Promotion::Promotion(int etime, int orderid, double exmon) :Event(etime, orderid)
-{
-	extraMoney = exmon;
-}
 
 void Promotion::Execute(Restaurant *pRest)
 {
@@ -38,4 +31,11 @@ void Promotion::Execute(Restaurant *pRest)
 	pRest->Add_OrderVip(prom);
 
 
+}
+Promotion::Promotion()
+{
+}
+Promotion::Promotion(int etime, int orderid, double exmon) :Event(etime, orderid)
+{
+	extraMoney = exmon;
 }

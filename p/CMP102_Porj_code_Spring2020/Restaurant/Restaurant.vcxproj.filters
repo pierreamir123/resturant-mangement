@@ -90,9 +90,6 @@
     <ClInclude Include="Rest\Order.h">
       <Filter>Restaurant</Filter>
     </ClInclude>
-    <ClInclude Include="Rest\Restaurant.h">
-      <Filter>Restaurant</Filter>
-    </ClInclude>
     <ClInclude Include="Events\Event.h">
       <Filter>Events</Filter>
     </ClInclude>
@@ -123,7 +120,7 @@
     <ClInclude Include="Events\Promotion.h">
       <Filter>Restaurant</Filter>
     </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\auxil.h">
+    <ClInclude Include="Rest\Restaurant.h">
       <Filter>Restaurant</Filter>
     </ClInclude>
   </ItemGroup>
@@ -253,7 +250,6 @@
       <Filter>Restaurant</Filter>
     </ClCompile>
     <ClCompile Include="Events\Cancellation.cpp" />
-    <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="Events\p.cpp" />
   </ItemGroup>
   <ItemGroup>

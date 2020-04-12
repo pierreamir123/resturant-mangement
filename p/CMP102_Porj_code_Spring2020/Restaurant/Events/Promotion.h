@@ -1,7 +1,7 @@
 
 
 #ifndef __Promotion_H_
-#define __promotion_H_
+#define __Promotion_H_
 
 #include "Event.h"
 #include"..\Rest\Restaurant.h"

@@ -32,11 +32,11 @@ private:
 
 
 	// data structure of orders
-	Queue<Order*> W_Vegan ;    //queue of waiting vegan orders
-	PriorityQueue<PriorityData<Order*>> W_VIP;//priority queue of waiting vip orders
+	Queue<Order*> W_Order_Vegan ;    //queue of waiting vegan orders
+	PriorityQueue<PriorityData<Order*>> W_Order_VIP;//priority queue of waiting vip orders
 	Queue<Order*> In_service;//queue of orders that in service 
 	Queue<Order*> finished ;// queue of finished orders
-	SortedList<Order*>W_Normal;//sorted list of waiting normal orders
+	SortedList<Order*>W_Order_Normal;//sorted list of waiting normal orders
 
 
 	//data structure of cooks 

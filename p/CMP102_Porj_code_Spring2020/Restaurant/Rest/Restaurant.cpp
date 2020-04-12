@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
-
+#include <string.h>
 using namespace std;
 
 #include "Restaurant.h"
@@ -18,22 +18,22 @@ void Restaurant::Add_Order(Order* o )
 {
 	if (o->GetType()== TYPE_NRM )
 	{
-		W_Normal.insertSorted(o) ;
+		W_Order_Normal.insertSorted(o) ;
 	}
 	if (o->GetType()== TYPE_VGAN )
 	{
-		W_Vegan.enqueue(o);
+		W_Order_Vegan.enqueue(o);
 
 	}
 	if(o->GetType()== TYPE_VIP)
 	{
 		PriorityData<Order*> pop (o,1);
-		W_VIP.Enqueue(pop);
+		W_Order_VIP.Enqueue(pop);
 	}
 }
 void Restaurant::Add_OrderVip(PriorityData<Order*> o)
 {
-	W_VIP.Enqueue(o);
+	W_Order_VIP.Enqueue(o);
 }
 void Restaurant::LoadingFunction(ifstream & input) // note that we passed the ifstream by & (why?)
 {
@@ -88,7 +88,7 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 			Av_cooks_VIP.enqueue(VipCook);
 		}
 		/////////////////////////////////////////
-		int TS,ID,SIZE,MONY;
+		int TS,ID,SIZE,MONNEY;
 		int ExMony;
 		int temp,orderType;
 
@@ -105,8 +105,8 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 				if(orderType=='V')
 					OrType=TYPE_VIP;
 
-				input>>TS>>ID>>SIZE>>MONY;
-				Event* event= new ArrivalEvent((ORD_TYPE)OrType,TS,ID,SIZE,MONY); // variables tet7at fel class we ne3melhom fe constructor
+				input>>TS>>ID>>SIZE>>MONNEY;
+				Event* event= new ArrivalEvent((ORD_TYPE)OrType,TS,ID,SIZE,MONNEY); // variables tet7at fel class we ne3melhom fe constructor
 				EventsQueue.enqueue(event);
 			}
 			if(temp== 'X')
@@ -180,35 +180,118 @@ Restaurant::~Restaurant()
 bool Restaurant::getEntryNormal(int position, Order*p)
 {
 
-	W_Normal.getEntry( position, p);
+	W_Order_Normal.getEntry( position, p);
 	return true;
 }
 
 bool Restaurant::removeNormal(int i)
 {
-	W_Normal.remove(i);
+	W_Order_Normal.remove(i);
 	return true;
 }
 void Restaurant::FillDrawingList()
 {
-	Order*pOrd;
-
-
 
 	//This function should be implemented in phase1
 	//It should add ALL orders and Cooks to the drawing list
 	//It should get orders from orders lists/queues/stacks/whatever (same for Cooks)
 	//To add orders it should call function  void GUI::AddToDrawingList(Order* pOrd);
 	//To add Cooks it should call function  void GUI::AddToDrawingList(Cook* pCc);
-	int size = 0;
-	Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
+	
+	Order*pOrd;
+	Cook*pCc;
+	int size = 999;
+	Order** WN_Orders_Array = W_Order_Normal.toArray(size);
+	Order** WV_Orders_Array = W_Order_Vegan.toArray(size);
+	PriorityData<Order*>* WVIP_Orders_Array = W_Order_VIP.toArray(size);
+	for(int i=0; i<size; i++)
+	{
+		pOrd = WN_Orders_Array[i];
+		pGUI->AddToDrawingList(pOrd);
+	}
+	
 
 	for(int i=0; i<size; i++)
 	{
-		pOrd = Demo_Orders_Array[i];
+		pOrd = WV_Orders_Array[i];
 		pGUI->AddToDrawingList(pOrd);
 	}
+	for(int i=0; i<size; i++)
+	{
+		pOrd=(WVIP_Orders_Array->getData());
+		pGUI->AddToDrawingList(pOrd);
+	}
+	
+	Cook**N_Cook=AV_Cooks_Normal.toArray(size);
+	Cook**Ve_Cook=AV_Cooks_vegan.toArray(size);
+	Cook**Vip_Cook=Av_cooks_VIP.toArray(size);
+	for(int i=0; i<size; i++)
+	{
+		pCc=N_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}
+	for(int i=0; i<size; i++)
+	{
+		pCc=N_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}
+	for(int i=0; i<size; i++)
+	{
+		pCc=Ve_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}
+	for(int i=0; i<size; i++)
+	{
+		pCc=Vip_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}
+	
+}
+void Restaurant::Simple_simulator()
+{
+	ifstream fofo;
+	string filename;	
+	Order* pOrd;
+	Event* pEv;
+	srand(time(NULL));
 
+	pGUI->PrintMessage("Simple simulator.    I/P filename:");
+	filename= pGUI->GetString();
+	fofo.open(filename);
+	LoadingFunction(fofo);
+
+	pGUI->PrintMessage("Events should be loaded from a file...CLICK to continue");
+	pGUI->waitForClick();
+
+	int CurrentTimeStep = 1;
+	//as long as events queue is not empty yet
+	while(!EventsQueue.isEmpty()|| !In_service.isEmpty())
+	{
+		//print current timestep
+		char timestep[10];
+		itoa(CurrentTimeStep,timestep,10);	
+		pGUI->PrintMessage(timestep);
+
+
+		//The next line may add new orders to the DEMO_Queue
+		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
+		FillDrawingList();
+		pGUI->UpdateInterface();
+
+		/////////////////////////////////////////////////////////////////////////////////////////
+		/// The next code section should be done through function "FillDrawingList()" once you
+		/// decide the appropriate list type for Orders and Cooks
+		if (CurrentTimeStep%5==0)
+		{
+			order
+		}
+
+			pGUI->UpdateInterface();
+		CurrentTimeStep++;
+
+	}
+		
+		
 }
 
 

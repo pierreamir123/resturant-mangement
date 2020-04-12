@@ -1,37 +1,67 @@
-﻿Build started 4/11/2020 5:01:46 AM.
+﻿Build started 4/12/2020 8:23:12 AM.
      1>Project "E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" on node 2 (Build target(s)).
        Project file contains ToolsVersion="14.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="4.0". For more information, please see http://go.microsoft.com/fwlink/?LinkId=291333.
      1>ClCompile:
-         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Events\p.cpp
+         C:\Program Files (x86)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Demo_Main.cpp Events\ArrivalEvent.cpp Events\Cancellation.cpp Events\p.cpp Rest\Restaurant.cpp
+         Restaurant.cpp
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(254): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\rest\restaurant.cpp(308): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\vc\include\stdlib.h(909) : see declaration of 'itoa'
+         Generating Code...
+         Skipping... (no relevant changes detected)
          p.cpp
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\promotion.h(9): error C2011: 'Promotion' : 'class' type redefinition
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\promotion.h(9) : see declaration of 'Promotion'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(6): error C2027: use of undefined type 'Promotion'
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\promotion.h(9) : see declaration of 'Promotion'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(6): error C2059: syntax error : ')'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(7): error C2143: syntax error : missing ';' before '{'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(7): error C2447: '{' : missing function header (old-style formal list?)
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(10): error C2027: use of undefined type 'Promotion'
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\promotion.h(9) : see declaration of 'Promotion'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(10): error C2062: type 'int' unexpected
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(10): error C2143: syntax error : missing ')' before ','
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(10): error C2259: 'Event' : cannot instantiate abstract class
-                 due to following members:
-                 'void Event::Execute(Restaurant *)' : is abstract
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\event.h(22) : see declaration of 'Event::Execute'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(10): error C2059: syntax error : ')'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(11): error C2259: 'Event' : cannot instantiate abstract class
-                 due to following members:
-                 'void Event::Execute(Restaurant *)' : is abstract
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\event.h(22) : see declaration of 'Event::Execute'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(11): error C2143: syntax error : missing ';' before '{'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(11): error C2447: '{' : missing function header (old-style formal list?)
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(15): error C2027: use of undefined type 'Promotion'
-                 e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\promotion.h(9) : see declaration of 'Promotion'
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(24): error C2065: 'OrderID' : undeclared identifier
-     1>e:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\cmp102_porj_code_spring2020\restaurant\events\p.cpp(34): error C2065: 'extraMoney' : undeclared identifier
-     1>Done Building Project "E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" (Build target(s)) -- FAILED.
+         Cancellation.cpp
+         ArrivalEvent.cpp
+         Demo_Main.cpp
+       Link:
+         C:\Program Files (x86)\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Debug\Restaurant.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Debug\Restaurant.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Debug\Restaurant.lib" /MACHINE:X86 Debug\CMUgraphics.obj
+         Debug\colors.obj
+         Debug\image.obj
+         Debug\jpegload.obj
+         Debug\jcomapi.obj
+         Debug\jcparam.obj
+         Debug\jdapimin.obj
+         Debug\jdapistd.obj
+         Debug\jdatasrc.obj
+         Debug\jdcoefct.obj
+         Debug\jdcolor.obj
+         Debug\jddctmgr.obj
+         Debug\jdhuff.obj
+         Debug\jdinput.obj
+         Debug\jdmainct.obj
+         Debug\jdmarker.obj
+         Debug\jdmaster.obj
+         Debug\jdmerge.obj
+         Debug\jdphuff.obj
+         Debug\jdpostct.obj
+         Debug\jdsample.obj
+         Debug\jdtrans.obj
+         Debug\jerror.obj
+         Debug\jidctflt.obj
+         Debug\jidctfst.obj
+         Debug\jidctint.obj
+         Debug\jidctred.obj
+         Debug\jmemmgr.obj
+         Debug\jmemnobs.obj
+         Debug\jquant1.obj
+         Debug\jquant2.obj
+         Debug\jutils.obj
+         Debug\keyqueue.obj
+         Debug\mousequeue.obj
+         Debug\windowinput.obj
+         Debug\Demo_Main.obj
+         Debug\Cancellation.obj
+         Debug\Event.obj
+         Debug\ArrivalEvent.obj
+         Debug\p.obj
+         Debug\GUI.obj
+         Debug\Cook.obj
+         Debug\Order.obj
+         Debug\Restaurant.obj
+         LINK : E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Debug\Restaurant.exe not found or not built by the last incremental link; performing full link
+         Restaurant.vcxproj -> E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Debug\Restaurant.exe
+     1>Done Building Project "E:\cufe-chs sephmore\spring\data structure\ppp\resturant-mangement\p\CMP102_Porj_code_Spring2020\Restaurant\Restaurant.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:03.32
+Time Elapsed 00:00:06.43
