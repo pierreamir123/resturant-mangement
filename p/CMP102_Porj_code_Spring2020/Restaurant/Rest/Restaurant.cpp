@@ -59,7 +59,7 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 		{
 			OrType = TYPE_NRM;
 			Cook* NormalCook=new Cook();  // variables tet3emel fe class cook we ne3mel constructor keda
-			
+
 			NormalCook->setType(OrType);
 			NormalCook->setBreakDuration(BN);
 			NormalCook->setID(ID);
@@ -122,11 +122,16 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 				EventsQueue.enqueue(event);
 			}
 		}
-
-
+		pGUI->PrintMessage("loaded");
+		pGUI->waitForClick();
 		input.close();
 	}
-	else cout << "Unable to open file";
+	else
+	{pGUI->PrintMessage ("Unable to open file");
+	
+	pGUI->waitForClick();
+
+	}
 }
 
 
@@ -146,7 +151,7 @@ void Restaurant::RunSimulation()
 	case MODE_SLNT:
 		break;
 	case MODE_DEMO:
-		Just_A_Demo();
+		Simple_simulator();
 
 	};
 
@@ -197,7 +202,7 @@ void Restaurant::FillDrawingList()
 	//It should get orders from orders lists/queues/stacks/whatever (same for Cooks)
 	//To add orders it should call function  void GUI::AddToDrawingList(Order* pOrd);
 	//To add Cooks it should call function  void GUI::AddToDrawingList(Cook* pCc);
-	
+
 	Order*pOrd;
 	Cook*pCc;
 	int size = 999;
@@ -209,7 +214,7 @@ void Restaurant::FillDrawingList()
 		pOrd = WN_Orders_Array[i];
 		pGUI->AddToDrawingList(pOrd);
 	}
-	
+
 
 	for(int i=0; i<size; i++)
 	{
@@ -221,7 +226,7 @@ void Restaurant::FillDrawingList()
 		pOrd=(WVIP_Orders_Array->getData());
 		pGUI->AddToDrawingList(pOrd);
 	}
-	
+
 	Cook**N_Cook=AV_Cooks_Normal.toArray(size);
 	Cook**Ve_Cook=AV_Cooks_vegan.toArray(size);
 	Cook**Vip_Cook=Av_cooks_VIP.toArray(size);
@@ -245,7 +250,7 @@ void Restaurant::FillDrawingList()
 		pCc=Vip_Cook[i];
 		pGUI->AddToDrawingList(pCc);
 	}
-	
+
 }
 void Restaurant::Simple_simulator()
 {
@@ -253,11 +258,11 @@ void Restaurant::Simple_simulator()
 	string filename;	
 	Order* pOrd;
 	Event* pEv;
-	srand(time(NULL));
+
 
 	pGUI->PrintMessage("Simple simulator.    I/P filename:");
-	filename= pGUI->GetString();
-	fofo.open(filename);
+	 
+	fofo.open(pGUI->GetString());
 	LoadingFunction(fofo);
 
 	pGUI->PrintMessage("Events should be loaded from a file...CLICK to continue");
@@ -271,8 +276,27 @@ void Restaurant::Simple_simulator()
 		char timestep[10];
 		itoa(CurrentTimeStep,timestep,10);	
 		pGUI->PrintMessage(timestep);
+		Order*poord;
+		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
+		FillDrawingList();
+		pGUI->UpdateInterface();
 
-
+		if (!W_Order_Normal.isEmpty())
+			{
+				W_Order_Normal.getEntry(0,poord);
+				W_Order_Normal.remove(0);
+				In_service.enqueue(poord);
+			}
+			if(!W_Order_Vegan.isEmpty())
+			{
+				W_Order_Vegan.dequeue(poord);
+				In_service.enqueue(poord);
+			}
+			if(!W_Order_VIP.isEmpty())
+			{
+				W_Order_Vegan.dequeue(poord);
+				In_service.enqueue(poord);
+			}
 		//The next line may add new orders to the DEMO_Queue
 		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
 		FillDrawingList();
@@ -282,142 +306,148 @@ void Restaurant::Simple_simulator()
 		/// The next code section should be done through function "FillDrawingList()" once you
 		/// decide the appropriate list type for Orders and Cooks
 		if (CurrentTimeStep%5==0)
-		{
-			order
+		{   for(int i=1;i=3;i++)
+			{Order*pooord;
+			In_service.dequeue(pooord);
 		}
+			}
+		
+		FillDrawingList();
+			pGUI->UpdateInterface();
+			CurrentTimeStep++;
+
+		
+
+	}
+	pGUI->UpdateInterface();
+	pGUI->PrintMessage("generation done, click to END program");
+		pGUI->waitForClick();
+	}
+
+
+
+
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	/// ==> 
+	///  DEMO-related functions. Should be removed in phases 1&2
+
+	//Begin of DEMO-related functions
+
+	//This is just a demo function for project introductory phase
+	//It should be removed starting phase 1
+	/**void Restaurant::Just_A_Demo()
+	{
+
+		//
+		// THIS IS JUST A DEMO FUNCTION
+		// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
+
+		int EventCnt;	
+		Order* pOrd;
+		Event* pEv;
+		srand(time(NULL));
+
+		pGUI->PrintMessage("Just a Demo. Enter EVENTS Count(next phases should read I/P filename):");
+		EventCnt = atoi(pGUI->GetString().c_str());	//get user input as a string then convert to integer
+
+		pGUI->PrintMessage("Generating Events randomly... In next phases, Events should be loaded from a file...CLICK to continue");
+		pGUI->waitForClick();
+
+		//Just for sake of demo, generate some cooks and add them to the drawing list
+		//In next phases, Cooks info should be loaded from input file
+		int C_count = 12;	
+		Cook *pC = new Cook[C_count];
+		int cID = 1;
+
+		for(int i=0; i<C_count; i++)
+		{
+			cID+= (rand()%15+1);	
+			pC[i].setID(cID);
+			pC[i].setType((ORD_TYPE)(rand()%TYPE_CNT));
+		}	
+
+
+		int EvTime = 0;
+
+		int O_id = 1;
+
+		//Create Random events and fill them into EventsQueue
+		//All generated event will be "ArrivalEvents" for the demo
+		for(int i=0; i<EventCnt; i++)
+		{
+			O_id += (rand()%4+1);		
+			int OType = rand()%TYPE_CNT;	//Randomize order type		
+			EvTime += (rand()%5+1);			//Randomize event time
+			//pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType);
+			EventsQueue.enqueue(pEv);
+
+		}	
+
+		// --->   In next phases, no random generation is done
+		// --->       EventsQueue should be filled from actual events loaded from input file
+
+
+
+
+
+		//Now We have filled EventsQueue (randomly)
+		int CurrentTimeStep = 1;
+
+
+		//as long as events queue is not empty yet
+		while(!EventsQueue.isEmpty())
+		{
+			//print current timestep
+			char timestep[10];
+			itoa(CurrentTimeStep,timestep,10);	
+			pGUI->PrintMessage(timestep);
+
+
+			//The next line may add new orders to the DEMO_Queue
+			ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
+
+
+			/////////////////////////////////////////////////////////////////////////////////////////
+			/// The next code section should be done through function "FillDrawingList()" once you
+			/// decide the appropriate list type for Orders and Cooks
+
+			//Let's add ALL randomly generated Cooks to GUI::DrawingList
+			for(int i=0; i<C_count; i++)
+				pGUI->AddToDrawingList(&pC[i]);
+
+			//Let's add ALL randomly generated Ordes to GUI::DrawingList
+			int size = 0;
+			Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
+
+			for(int i=0; i<size; i++)
+			{
+				pOrd = Demo_Orders_Array[i];
+				pGUI->AddToDrawingList(pOrd);
+			}
+			/////////////////////////////////////////////////////////////////////////////////////////
 
 			pGUI->UpdateInterface();
-		CurrentTimeStep++;
-
-	}
-		
-		
-}
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-/// ==> 
-///  DEMO-related functions. Should be removed in phases 1&2
-
-//Begin of DEMO-related functions
-
-//This is just a demo function for project introductory phase
-//It should be removed starting phase 1
-void Restaurant::Just_A_Demo()
-{
-
-	//
-	// THIS IS JUST A DEMO FUNCTION
-	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
-
-	int EventCnt;	
-	Order* pOrd;
-	Event* pEv;
-	srand(time(NULL));
-
-	pGUI->PrintMessage("Just a Demo. Enter EVENTS Count(next phases should read I/P filename):");
-	EventCnt = atoi(pGUI->GetString().c_str());	//get user input as a string then convert to integer
-
-	pGUI->PrintMessage("Generating Events randomly... In next phases, Events should be loaded from a file...CLICK to continue");
-	pGUI->waitForClick();
-
-	//Just for sake of demo, generate some cooks and add them to the drawing list
-	//In next phases, Cooks info should be loaded from input file
-	int C_count = 12;	
-	Cook *pC = new Cook[C_count];
-	int cID = 1;
-
-	for(int i=0; i<C_count; i++)
-	{
-		cID+= (rand()%15+1);	
-		pC[i].setID(cID);
-		pC[i].setType((ORD_TYPE)(rand()%TYPE_CNT));
-	}	
-
-
-	int EvTime = 0;
-
-	int O_id = 1;
-
-	//Create Random events and fill them into EventsQueue
-	//All generated event will be "ArrivalEvents" for the demo
-	for(int i=0; i<EventCnt; i++)
-	{
-		O_id += (rand()%4+1);		
-		int OType = rand()%TYPE_CNT;	//Randomize order type		
-		EvTime += (rand()%5+1);			//Randomize event time
-		//pEv = new ArrivalEvent(EvTime,O_id,(ORD_TYPE)OType);
-		EventsQueue.enqueue(pEv);
-
-	}	
-
-	// --->   In next phases, no random generation is done
-	// --->       EventsQueue should be filled from actual events loaded from input file
-
-
-
-
-
-	//Now We have filled EventsQueue (randomly)
-	int CurrentTimeStep = 1;
-
-
-	//as long as events queue is not empty yet
-	while(!EventsQueue.isEmpty())
-	{
-		//print current timestep
-		char timestep[10];
-		itoa(CurrentTimeStep,timestep,10);	
-		pGUI->PrintMessage(timestep);
-
-
-		//The next line may add new orders to the DEMO_Queue
-		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
-
-
-		/////////////////////////////////////////////////////////////////////////////////////////
-		/// The next code section should be done through function "FillDrawingList()" once you
-		/// decide the appropriate list type for Orders and Cooks
-
-		//Let's add ALL randomly generated Cooks to GUI::DrawingList
-		for(int i=0; i<C_count; i++)
-			pGUI->AddToDrawingList(&pC[i]);
-
-		//Let's add ALL randomly generated Ordes to GUI::DrawingList
-		int size = 0;
-		Order** Demo_Orders_Array = DEMO_Queue.toArray(size);
-
-		for(int i=0; i<size; i++)
-		{
-			pOrd = Demo_Orders_Array[i];
-			pGUI->AddToDrawingList(pOrd);
+			Sleep(1000);
+			CurrentTimeStep++;	//advance timestep
+			pGUI->ResetDrawingList();
 		}
-		/////////////////////////////////////////////////////////////////////////////////////////
 
-		pGUI->UpdateInterface();
-		Sleep(1000);
-		CurrentTimeStep++;	//advance timestep
-		pGUI->ResetDrawingList();
+		delete []pC;
+
+
+		pGUI->PrintMessage("generation done, click to END program");
+		pGUI->waitForClick();
+
+
+	}**/
+	////////////////
+
+	void Restaurant::AddtoDemoQueue(Order *pOrd)
+	{
+		DEMO_Queue.enqueue(pOrd);
 	}
 
-	delete []pC;
-
-
-	pGUI->PrintMessage("generation done, click to END program");
-	pGUI->waitForClick();
-
-
-}
-////////////////
-
-void Restaurant::AddtoDemoQueue(Order *pOrd)
-{
-	DEMO_Queue.enqueue(pOrd);
-}
-
-/// ==> end of DEMO-related function
-//////////////////////////////////////////////////////////////////////////////////////////////
+	/// ==> end of DEMO-related function
+	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
