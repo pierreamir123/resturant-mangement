@@ -26,7 +26,7 @@ class Restaurant
 {	
 private:
 	GUI *pGUI;
-
+	int count;
 	// data structure of events
 	Queue<Event*> EventsQueue;	//Queue of all events that will be loaded from file
 
@@ -48,14 +48,10 @@ private:
 
 	/// ==> 
 	//	DEMO-related members. Should be removed in phases 1&2
-	Queue<Order*> DEMO_Queue;	//Important: This is just for demo
+	//Queue<Order*> DEMO_Queue;	//Important: This is just for demo
 	/// ==>
 
 
-
-	//
-	// TODO: Add More Data Members As Needed
-	//
 
 public:
 
@@ -74,15 +70,12 @@ public:
 
 	void FillDrawingList();
 
-	//
-	// TODO: Add More Member Functions As Needed
-	//
 
 
-	/// ===================    DEMO-related functions. Should be removed in phases 1&2   ================= 
+	/*/// ===================    DEMO-related functions. Should be removed in phases 1&2   ================= 
 
 	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
-	void AddtoDemoQueue(Order* po);	//adds an order to the demo queue
+	void AddtoDemoQueue(Order* po);	//adds an order to the demo queue*/
 
 	/// ================================================================================================== 
 

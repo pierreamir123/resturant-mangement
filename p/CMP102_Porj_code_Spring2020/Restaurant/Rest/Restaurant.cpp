@@ -27,8 +27,10 @@ void Restaurant::Add_Order(Order* o )
 	}
 	if(o->GetType()== TYPE_VIP)
 	{
-		PriorityData<Order*> pop (o,1);
+		int pri = 100;
+		PriorityData<Order*> pop (o,pri);
 		W_Order_VIP.Enqueue(pop);
+		pri--;
 	}
 }
 void Restaurant::Add_OrderVip(PriorityData<Order*> o)
@@ -55,7 +57,7 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 
 
 
-		for(int ID=0;ID<=N;ID++)
+		for(int ID=1;ID<=N;ID++)
 		{
 			OrType = TYPE_NRM;
 			Cook* NormalCook=new Cook();  // variables tet3emel fe class cook we ne3mel constructor keda
@@ -66,7 +68,7 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 			NormalCook->setSpeed(SN);
 			AV_Cooks_Normal.enqueue(NormalCook);    //ne3mel cook object fe class cook
 		}
-		for(int ID=0;ID<=G;ID++)
+		for(int ID=1;ID<=G;ID++)
 		{
 			OrType = TYPE_VGAN;
 			Cook* VeganCook=new Cook();
@@ -76,7 +78,7 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 			VeganCook->setSpeed(SG);
 			AV_Cooks_vegan.enqueue(VeganCook);
 		}
-		for(int ID=0;ID<=V;ID++)
+		for(int ID=1;ID<=V;ID++)
 		{
 			OrType = TYPE_VIP;
 			Cook* VipCook=new Cook();
@@ -88,14 +90,13 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 			Av_cooks_VIP.enqueue(VipCook);
 		}
 		/////////////////////////////////////////
-		int TS,ID,SIZE,MONNEY;
-		int ExMony;
-		int temp,orderType;
+		
+		char temp,orderType;
+		int one ,two , three,four;
 
-
-		for(int l=0; l<M; l++)
+		for(int l=1; l<=M; l++)
 		{
-			input>>temp>>orderType;
+			input>>temp>>orderType>>one>>two>>three>>four;//one =ts , two=id,three=size,4=money 
 			if(temp == 'R')
 			{
 				if(orderType=='N')
@@ -105,20 +106,20 @@ void Restaurant::LoadingFunction(ifstream & input) // note that we passed the if
 				if(orderType=='V')
 					OrType=TYPE_VIP;
 
-				input>>TS>>ID>>SIZE>>MONNEY;
-				Event* event= new ArrivalEvent((ORD_TYPE)OrType,TS,ID,SIZE,MONNEY); // variables tet7at fel class we ne3melhom fe constructor
+				
+				Event* event= new ArrivalEvent((ORD_TYPE)OrType,one,two,three,four); // variables tet7at fel class we ne3melhom fe constructor
 				EventsQueue.enqueue(event);
 			}
 			if(temp== 'X')
 			{
-				input>>TS>>ID;
-				Event* event= new Cancellation(TS,ID);
+				
+				Event* event= new Cancellation(one,two);
 				EventsQueue.enqueue(event);
 			}
 			if(temp=='P')
 			{
-				input>>TS>>ID>>ExMony;
-				Event* event= new Promotion (TS,ID,ExMony);
+				
+				Event* event= new Promotion (one,two,three);
 				EventsQueue.enqueue(event);
 			}
 		}
@@ -145,13 +146,13 @@ void Restaurant::RunSimulation()
 	switch (mode)	//Add a function for each mode in next phases
 	{
 	case MODE_INTR:
-		break;
+		Simple_simulator();
 	case MODE_STEP:
 		break;
 	case MODE_SLNT:
 		break;
-	case MODE_DEMO:
-		Simple_simulator();
+	//case MODE_DEMO:
+		
 
 	};
 
@@ -166,7 +167,7 @@ void Restaurant::ExecuteEvents(int CurrentTimeStep)
 	Event *pE;
 	while( EventsQueue.peekFront(pE) )	//as long as there are more events
 	{
-		if(pE->getEventTime() > CurrentTimeStep )	//no more events at current timestep
+		if(pE->getEventTime() != CurrentTimeStep )	//no more events at current timestep
 			return;
 
 		pE->Execute(this);
@@ -207,57 +208,61 @@ void Restaurant::FillDrawingList()
 	Cook*pCc;
 	int size = 999;
 	Order** WN_Orders_Array = W_Order_Normal.toArray(size);
-	Order** WV_Orders_Array = W_Order_Vegan.toArray(size);
-	PriorityData<Order*>* WVIP_Orders_Array = W_Order_VIP.toArray(size);
 	for(int i=0; i<size; i++)
 	{
 		pOrd = WN_Orders_Array[i];
 		pGUI->AddToDrawingList(pOrd);
 	}
 
-
+	Order** WV_Orders_Array = W_Order_Vegan.toArray(size);
 	for(int i=0; i<size; i++)
 	{
 		pOrd = WV_Orders_Array[i];
 		pGUI->AddToDrawingList(pOrd);
 	}
+
+	PriorityData<Order*>* WVIP_Orders_Array = W_Order_VIP.toArray(size); 
 	for(int i=0; i<size; i++)
 	{
 		pOrd=(WVIP_Orders_Array->getData());
 		pGUI->AddToDrawingList(pOrd);
 	}
-
+	
 	Cook**N_Cook=AV_Cooks_Normal.toArray(size);
+	for(int i=0; i<size; i++)
+	{
+		pCc=N_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}
+
 	Cook**Ve_Cook=AV_Cooks_vegan.toArray(size);
-	Cook**Vip_Cook=Av_cooks_VIP.toArray(size);
-	for(int i=0; i<size; i++)
-	{
-		pCc=N_Cook[i];
-		pGUI->AddToDrawingList(pCc);
-	}
-	for(int i=0; i<size; i++)
-	{
-		pCc=N_Cook[i];
-		pGUI->AddToDrawingList(pCc);
-	}
 	for(int i=0; i<size; i++)
 	{
 		pCc=Ve_Cook[i];
 		pGUI->AddToDrawingList(pCc);
 	}
+
+	Cook**Vip_Cook=Av_cooks_VIP.toArray(size);
 	for(int i=0; i<size; i++)
 	{
 		pCc=Vip_Cook[i];
 		pGUI->AddToDrawingList(pCc);
 	}
-
+	
 }
+	/*for(int i=0; i<size; i++)
+	{
+		pCc=N_Cook[i];
+		pGUI->AddToDrawingList(pCc);
+	}*/
+	
+
 void Restaurant::Simple_simulator()
 {
 	ifstream fofo;
 	string filename;	
-	Order* pOrd;
-	Event* pEv;
+	//Order* pOrd;
+	//Event* pEv;
 
 
 	pGUI->PrintMessage("Simple simulator.    I/P filename:");
@@ -269,57 +274,77 @@ void Restaurant::Simple_simulator()
 	pGUI->waitForClick();
 
 	int CurrentTimeStep = 1;
+	
+	pGUI->UpdateInterface();
 	//as long as events queue is not empty yet
-	while(!EventsQueue.isEmpty()|| !In_service.isEmpty())
+	while(!EventsQueue.isEmpty() || !In_service.isEmpty() )
 	{
 		//print current timestep
-		char timestep[10];
-		itoa(CurrentTimeStep,timestep,10);	
+		char timestep[100];
+		itoa(CurrentTimeStep,timestep,100);	
 		pGUI->PrintMessage(timestep);
 		Order*poord;
-		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
+		ExecuteEvents(CurrentTimeStep);
+		//execute all events at current time step
 		FillDrawingList();
 		pGUI->UpdateInterface();
-
+		
 		if (!W_Order_Normal.isEmpty())
 			{
 				W_Order_Normal.getEntry(0,poord);
 				W_Order_Normal.remove(0);
-				In_service.enqueue(poord);
+				poord->setStatus(SRV);
+				In_service.enqueue (poord);
+					pGUI->AddToDrawingList(poord);
+
 			}
-			if(!W_Order_Vegan.isEmpty())
+		if(!W_Order_Vegan.isEmpty())
 			{
 				W_Order_Vegan.dequeue(poord);
-				In_service.enqueue(poord);
+				poord->setStatus(SRV);
+				In_service.enqueue (poord);
+				
+				pGUI->AddToDrawingList(poord);
 			}
-			if(!W_Order_VIP.isEmpty())
+		if(!W_Order_VIP.isEmpty())
 			{
-				W_Order_Vegan.dequeue(poord);
-				In_service.enqueue(poord);
+				PriorityData<Order*> temp;
+				W_Order_VIP.Dequeue(temp);
+				poord->setStatus(SRV);
+				In_service.enqueue (temp.getData());
+					pGUI->AddToDrawingList(poord);
 			}
-		//The next line may add new orders to the DEMO_Queue
+		/*//The next line may add new orders to the DEMO_Queue
 		ExecuteEvents(CurrentTimeStep);	//execute all events at current time step
 		FillDrawingList();
-		pGUI->UpdateInterface();
+		pGUI->UpdateInterface();*/
 
 		/////////////////////////////////////////////////////////////////////////////////////////
 		/// The next code section should be done through function "FillDrawingList()" once you
 		/// decide the appropriate list type for Orders and Cooks
-		if (CurrentTimeStep%5==0)
-		{   for(int i=1;i=3;i++)
-			{Order*pooord;
-			In_service.dequeue(pooord);
-		}
+
+		Order*pooord;
+		if (CurrentTimeStep % 5==0)
+		{   
+			if ( !In_service.isEmpty() )
+			{
+				for ( int i=0; i<3; i++ )
+				{
+					In_service.dequeue(pooord);
+					pooord->setStatus(DONE);
+					finished.enqueue(pooord);
+					pGUI->AddToDrawingList(pooord);
+				}
 			}
+		}
 		
-		FillDrawingList();
-			pGUI->UpdateInterface();
+		pGUI->UpdateInterface();
 			CurrentTimeStep++;
-
-		
-
+			
+		pGUI->waitForClick();
+		pGUI->ResetDrawingList();
 	}
-	pGUI->UpdateInterface();
+	
 	pGUI->PrintMessage("generation done, click to END program");
 		pGUI->waitForClick();
 	}
@@ -442,10 +467,10 @@ void Restaurant::Simple_simulator()
 	}**/
 	////////////////
 
-	void Restaurant::AddtoDemoQueue(Order *pOrd)
+	/*void Restaurant::AddtoDemoQueue(Order *pOrd)
 	{
 		DEMO_Queue.enqueue(pOrd);
-	}
+	}*/
 
 	/// ==> end of DEMO-related function
 	//////////////////////////////////////////////////////////////////////////////////////////////

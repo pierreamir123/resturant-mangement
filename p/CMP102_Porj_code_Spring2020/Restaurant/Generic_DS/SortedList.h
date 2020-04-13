@@ -115,7 +115,12 @@ bool SortedList<T> :: insertSorted ( const T & newEntry )   //project Note: momk
 	}
 
 	Node<T>* nptr = head;
-	if ( newEntry < nptr ->getItem()  )
+
+	if ( nptr == nullptr )
+	{
+		head = newNode;
+	}
+	else if ( newEntry < nptr ->getItem()  )
 	{
 		newNode ->setNext( head );
 		head = newNode;

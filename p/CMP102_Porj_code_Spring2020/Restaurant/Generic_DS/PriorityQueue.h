@@ -41,7 +41,7 @@ bool PriorityQueue<T> :: peekFront ( T & anEntry ) const
 		return false;
 	}
 
-	anEntry = front ->getItem().getData();
+	anEntry = front ->getItem();
 	return true;
 }
 
