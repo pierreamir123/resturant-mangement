@@ -340,9 +340,15 @@ void Restaurant::Simple_simulator()
 		
 		pGUI->UpdateInterface();
 			CurrentTimeStep++;
-			
+			pGUI->ResetDrawingList();
+			int count;
+			Order** poooord= finished.toArray(count);
+			for(int i=0;i<+count;i++)
+
+			{
+				pGUI->AddToDrawingList(poooord[i]);
+			}
 		pGUI->waitForClick();
-		pGUI->ResetDrawingList();
 	}
 	
 	pGUI->PrintMessage("generation done, click to END program");
